@@ -12,6 +12,7 @@ module "avm-res-apimanagement-service" {
   sku_name            = each.value.sku
   tags                = var.default_tags
   enable_telemetry    = var.enable_telemetry
+  managed_identities  = each.value.managed_identities
 
   diagnostic_settings = { for name, setting in each.value.diagnostic_settings : name => {
     workspace_resource_id          = module.avm-res-operationalinsights-workspace[setting.workspace].resource_id
