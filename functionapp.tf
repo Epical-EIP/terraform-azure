@@ -23,5 +23,5 @@ module "avm-res-web-site" {
   storage_container_type          = "blobContainer"
   key_vault_reference_identity_id = each.value.key_vault != null ? module.avm-res-keyvault-vault["${each.value.key_vault}"].resource_id : null
   enable_application_insights     = each.value.enable_application_insights
-  managed_identities               = each.value.managed_identities
+  managed_identities              = each.value.managed_identities
 }
