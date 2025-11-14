@@ -18,10 +18,16 @@ module "avm-res-web-site" {
   functions_extension_version     = each.value.functions_extension_version
   https_only                      = each.value.https_only
   instance_memory_in_mb           = each.value.instance_memory_in_mb
-  storage_authentication_type     = "SystemAssignedIdentity"
+  storage_authentication_type     = each.value.storage_authentication_type
   storage_container_endpoint      = module.avm-res-storage-storageaccount["${each.value.storage_account}"].fqdn["blob"]
-  storage_container_type          = "blobContainer"
+  storage_container_type          = each.value.storage_container_type
+  storage_account_access_key =  module.avm-res-storage-storageaccount["${each.value.storage_account}"].resource.primary_access_key
+  storage_uses_managed_identity = each.value.storage_uses_managed_identity
+ 
   key_vault_reference_identity_id = each.value.key_vault != null ? module.avm-res-keyvault-vault["${each.value.key_vault}"].resource_id : null
   enable_application_insights     = each.value.enable_application_insights
+   application_insights = {
+    workspace_resource_id = each.value.log_analytics_workspace != null ? module.avm-res-operationalinsights-workspace["${each.value.log_analytics_workspace}"].resource_id : null
+  }
   managed_identities              = each.value.managed_identities
 }

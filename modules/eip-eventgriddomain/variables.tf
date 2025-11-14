@@ -39,3 +39,37 @@ variable "topics" {
   type        = list(string)
   default     = []
 }
+
+variable "input_mapping_default_values" {
+  description = "Default values for input mapping."
+  type = object({
+    data_version = string
+    event_type   = string
+    subject      = string
+  })
+  default = {
+    data_version = null
+    event_type = null
+    subject = null
+  }
+}
+
+variable "input_mapping_fields" {
+  description = "Fields for input mapping."
+  type = object({
+    data_version = string
+    event_time   = string
+    event_type   = string
+    id           = string
+    subject      = string
+    topic        = string
+  })
+  default = {
+    data_version = null
+    event_time   = null
+    event_type   = null
+    id           = null
+    subject      = null
+    topic        = null
+  }
+}
