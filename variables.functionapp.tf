@@ -12,10 +12,13 @@ variable "function_apps" {
     instance_memory_in_mb       = optional(number, 512)               # Default instance memory 512 MB
     key_vault                   = optional(string, null)
     storage_uses_managed_identity = optional(bool, false)              # Default uses Managed Identity for Storage Account
-    storage_container_type      = optional(string, "blobContainer")
     storage_authentication_type = optional(string, "StorageAccountConnectionString") # Default Storage Account Connection String
     enable_application_insights = optional(bool, true) # Default enable Application Insights
     log_analytics_workspace     = optional(string, null)
+    site_config                 = optional(map(any), {}) # Additional site config settings
+    app_settings               = optional(map(string), {})
+    virtual_network           = optional(string, null)
+    subnet                    = optional(string, null)
     managed_identities = optional(object({
       system_assigned            = optional(bool, true) # Default enable System Assigned Identity
       user_assigned_resource_ids = optional(set(string), [])
