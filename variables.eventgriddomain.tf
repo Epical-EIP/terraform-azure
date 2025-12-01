@@ -8,7 +8,7 @@ variable "eventgrid_domains" {
       data_version = string
       event_type   = string
       subject      = string
-    }), {
+      }), {
       data_version = null
       event_type   = null
       subject      = null
