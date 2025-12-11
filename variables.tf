@@ -11,7 +11,6 @@ variable "customer_abbreviation" {
 variable "environment" {
   description = "The environment in which the resources are deployed. Example values: dev, test, prod."
   type        = string
-  default     = "dev"
 }
 
 variable "location" {
