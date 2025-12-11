@@ -14,6 +14,16 @@ resource "azurerm_storage_container" "this" {
   storage_account_id = module.avm-res-storage-storageaccount["${each.value.storage_account}"].resource.id
 }
 
+resource "azurerm_service_plan" "this" {
+  for_each            = contains(var.enabled_features, "func") ? var.function_apps : {}
+  location            = each.value.location != null ? each.value.location : var.location
+  name                = join("-", ["ASP", each.key, local.name_suffix])
+  os_type             = each.value.os_type
+  resource_group_name = azurerm_resource_group.rg["${each.value.resource_group}"].name
+  sku_name            = each.value.sku
+  tags                = var.default_tags
+}
+
 module "avm-res-web-site" {
   source  = "Azure/avm-res-web-site/azurerm"
   version = "0.19.1"
@@ -22,10 +32,10 @@ module "avm-res-web-site" {
   for_each = contains(var.enabled_features, "func") ? var.function_apps : {}
 
   name                        = join("-", ["func", local.name_prefix, each.key, local.name_suffix])
-  location                    = var.location
+  location                    = each.value.location != null ? each.value.location : var.location
   resource_group_name         = azurerm_resource_group.rg["${each.value.resource_group}"].name
-  os_type                     = azurerm_service_plan.sp["${each.value.service_plan}"].os_type
-  service_plan_resource_id    = azurerm_service_plan.sp["${each.value.service_plan}"].id
+  os_type                     = azurerm_service_plan.this["${each.key}"].os_type
+  service_plan_resource_id    = azurerm_service_plan.this["${each.key}"].id
   enable_telemetry            = var.enable_telemetry
   storage_account_name        = module.avm-res-storage-storageaccount["${each.value.storage_account}"].name
   fc1_runtime_name            = each.value.fc1_runtime_name

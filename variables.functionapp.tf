@@ -2,7 +2,9 @@ variable "function_apps" {
   type = map(object({
     resource_group                = string
     storage_account               = string
-    service_plan                  = string
+    sku                           = string
+    os_type                       = string
+    location                      = optional(string, null)
     enable_telemetry              = optional(bool, false)
     fc1_runtime_name              = optional(string, "dotnet-isolated") # Default .NET Isolated
     fc1_runtime_version           = optional(string, "8.0")             # Default .NET 8
@@ -23,6 +25,7 @@ variable "function_apps" {
       system_assigned            = optional(bool, true) # Default enable System Assigned Identity
       user_assigned_resource_ids = optional(set(string), [])
     }), { system_assigned = true })
+
   }))
 }
 
