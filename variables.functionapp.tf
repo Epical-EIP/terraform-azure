@@ -17,7 +17,13 @@ variable "function_apps" {
     storage_authentication_type   = optional(string, "StorageAccountConnectionString") # Default Storage Account Connection String
     enable_application_insights   = optional(bool, true)                               # Default enable Application Insights
     log_analytics_workspace       = optional(string, null)
-    site_config                   = optional(map(any), {}) # Additional site config settings
+    site_config                   = optional(object({ 
+      minimum_tls_version = optional(string, "1.2")
+      cors = optional(map(object({
+        allowed_origins     = optional(list(string))
+        support_credentials = optional(bool, false)
+      })), {})
+    }), {})
     app_settings                  = optional(map(string), {})
     virtual_network               = optional(string, null)
     subnet                        = optional(string, null)
