@@ -15,6 +15,8 @@ module "avm-res-documentdb-databaseaccount" {
   network_acl_bypass_for_azure_services = each.value.network_acl_bypass_for_azure_services
   public_network_access_enabled         = each.value.public_network_access_enabled
   managed_identities                    = each.value.managed_identities
+  backup                                = each.value.backup
+
 
   virtual_network_rules = each.value.virtual_network != null ? [
     {

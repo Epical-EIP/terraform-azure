@@ -36,5 +36,5 @@ variable "enable_telemetry" {
 variable "enabled_features" {
   description = "The features to enable for the resources."
   type        = list(string)
-  default     = ["rg", "apim", "kv", "log", "sb", "func", "logic", "storage", "vnet", "natgw", "pip", "cosmosdb","evgd"]
+  default     = ["rg", "apim", "kv", "log", "sb", "func", "logic", "storage", "vnet", "natgw", "pip", "cosmosdb", "evgd"]
 }

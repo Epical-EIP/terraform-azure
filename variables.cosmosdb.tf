@@ -15,16 +15,22 @@ variable "cosmosdb_accounts" {
       failover_priority = number
       is_zone_redundant = optional(bool, true)
     })), null)
-    enable_automatic_failover           = optional(bool, false)
-    virtual_network                     = optional(string, null)
-    subnet                              = optional(string, null)
-    ip_range_filter                     = optional(set(string), [])
-    enable_multiple_write_locations     = optional(bool, false)
-    capabilities                        = optional(set(object({ name = string })), [])
-    backup_policy_type                  = optional(string, "Periodic") # Options: Periodic, Continuous
-    periodic_backup_interval_in_minutes = optional(number, 240)        # Default 4 hours
-    periodic_backup_retention_in_hours  = optional(number, 8)          # Default 8 hours
-    continuous_backup_retention_in_days = optional(number, 7)          # Default 7 days
+    enable_automatic_failover       = optional(bool, false)
+    virtual_network                 = optional(string, null)
+    subnet                          = optional(string, null)
+    ip_range_filter                 = optional(set(string), [])
+    enable_multiple_write_locations = optional(bool, false)
+    capabilities                    = optional(set(object({ name = string })), [])
+    backup = optional(object({
+      retention_in_hours  = optional(number, 8)
+      interval_in_minutes = optional(number, 240)
+      storage_redundancy  = optional(string, "Geo")
+      type                = optional(string, "Continuous")
+    tier = optional(string, "Continuous30Days") }), [])
+
+    periodic_backup_interval_in_minutes = optional(number, 240) # Default 4 hours
+    periodic_backup_retention_in_hours  = optional(number, 8)   # Default 8 hours
+    continuous_backup_retention_in_days = optional(number, 7)   # Default 7 days
     tags                                = optional(map(string), {})
     managed_identities = optional(object({
       system_assigned            = optional(bool, true) # Default enable System Assigned Identity
