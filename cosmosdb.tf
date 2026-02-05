@@ -16,7 +16,7 @@ module "avm-res-documentdb-databaseaccount" {
   public_network_access_enabled         = each.value.public_network_access_enabled
   managed_identities                    = each.value.managed_identities
   backup                                = each.value.backup
-
+  capacity                              = each.value.capacity
 
   virtual_network_rules = each.value.virtual_network != null ? [
     {

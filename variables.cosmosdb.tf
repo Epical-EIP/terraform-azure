@@ -26,7 +26,7 @@ variable "cosmosdb_accounts" {
       interval_in_minutes = optional(number, 240)
       storage_redundancy  = optional(string, "Geo")
       type                = optional(string, "Continuous")
-      tier                = optional(string, "Continuous30Days") 
+      tier                = optional(string, "Continuous30Days")
     }), {})
 
     periodic_backup_interval_in_minutes = optional(number, 240) # Default 4 hours
@@ -46,5 +46,8 @@ variable "cosmosdb_accounts" {
     }), null)
     network_acl_bypass_for_azure_services = optional(bool, false)
     public_network_access_enabled         = optional(bool, false)
+    capacity = optional(object({
+      total_throughput_limit = optional(number, -1)
+    }), {})
   }))
 }
