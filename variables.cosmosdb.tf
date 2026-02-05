@@ -18,7 +18,7 @@ variable "cosmosdb_accounts" {
     enable_automatic_failover           = optional(bool, false)
     virtual_network                     = optional(string, null)
     subnet                              = optional(string, null)
-    ip_range_filter                     = optional(string, null)
+    ip_range_filter                     = optional(set(string), [])
     enable_multiple_write_locations     = optional(bool, false)
     capabilities                        = optional(set(object({ name = string })), [])
     backup_policy_type                  = optional(string, "Periodic") # Options: Periodic, Continuous
