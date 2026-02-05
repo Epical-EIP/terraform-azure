@@ -1,6 +1,6 @@
 module "avm-res-documentdb-databaseaccount" {
   source  = "Azure/avm-res-documentdb-databaseaccount/azurerm"
-  version = "0.6.0"
+  version = "0.10.0"
 
   for_each = contains(var.enabled_features, "cosmosdb") ? var.cosmosdb_accounts : {}
 
