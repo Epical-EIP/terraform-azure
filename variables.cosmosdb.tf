@@ -13,8 +13,8 @@ variable "cosmosdb_accounts" {
     geo_locations = optional(set(object({
       location          = string
       failover_priority = number
-      is_zone_redundant = optional(bool, false)
-    })), [])
+      is_zone_redundant = optional(bool, true)
+    })), null)
     enable_automatic_failover           = optional(bool, false)
     virtual_network                     = optional(string, null)
     subnet                              = optional(string, null)
