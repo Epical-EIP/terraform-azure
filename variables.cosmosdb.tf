@@ -26,7 +26,8 @@ variable "cosmosdb_accounts" {
       interval_in_minutes = optional(number, 240)
       storage_redundancy  = optional(string, "Geo")
       type                = optional(string, "Continuous")
-    tier = optional(string, "Continuous30Days") }), [])
+      tier                = optional(string, "Continuous30Days") 
+    }), {})
 
     periodic_backup_interval_in_minutes = optional(number, 240) # Default 4 hours
     periodic_backup_retention_in_hours  = optional(number, 8)   # Default 8 hours
