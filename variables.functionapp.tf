@@ -17,20 +17,23 @@ variable "function_apps" {
     storage_authentication_type   = optional(string, "StorageAccountConnectionString") # Default Storage Account Connection String
     enable_application_insights   = optional(bool, true)                               # Default enable Application Insights
     log_analytics_workspace       = optional(string, null)
-    site_config                   = optional(object({ 
+    site_config = optional(object({
       minimum_tls_version = optional(string, "1.2")
       cors = optional(map(object({
         allowed_origins     = optional(list(string))
         support_credentials = optional(bool, false)
       })), {})
     }), {})
-    app_settings                  = optional(map(string), {})
-    virtual_network               = optional(string, null)
-    subnet                        = optional(string, null)
+    app_settings    = optional(map(string), {})
+    virtual_network = optional(string, null)
+    subnet          = optional(string, null)
     managed_identities = optional(object({
       system_assigned            = optional(bool, true) # Default enable System Assigned Identity
       user_assigned_resource_ids = optional(set(string), [])
     }), { system_assigned = true })
+    tags = merge(var.default_tags, {
+      /* Add your tags */
+    })
 
   }))
 }
