@@ -4,14 +4,14 @@ module "avm-res-operationalinsights-workspace" {
 
   for_each = contains(var.enabled_features, "log") ? var.log_analytics_workspaces : {}
 
-  enable_telemetry                          = var.enable_telemetry
-  location                                  = var.location
-  resource_group_name                       = azurerm_resource_group.rg["${each.value.resource_group}"].name
-  name                                      = join("-", ["log", local.name_prefix, each.key, local.name_suffix])
-  log_analytics_workspace_retention_in_days = each.value.retention_in_days
-  log_analytics_workspace_sku               = each.value.sku
+  enable_telemetry                               = var.enable_telemetry
+  location                                       = var.location
+  resource_group_name                            = azurerm_resource_group.rg["${each.value.resource_group}"].name
+  name                                           = join("-", ["log", local.name_prefix, each.key, local.name_suffix])
+  log_analytics_workspace_retention_in_days      = each.value.retention_in_days
+  log_analytics_workspace_sku                    = each.value.sku
   log_analytics_workspace_internet_query_enabled = each.value.internet_query_enabled
-  tags                                      = merge(var.default_tags, each.value.tags)
+  tags                                           = merge(var.default_tags, each.value.tags)
   log_analytics_workspace_identity = {
     type = "SystemAssigned"
   }

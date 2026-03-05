@@ -2,7 +2,7 @@ variable "search_services" {
   type = map(object({
     resource_group               = string
     sku                          = optional(string, "basic") # Default SKU is Basic
-    semantical_search_sku        = optional(string, "free")  # Default is free
+    semantic_search_sku          = optional(string, null)    # Default is null
     allowed_ips                  = optional(list(string), null)
     local_authentication_enabled = optional(bool, true) # Default disable local authentication
     managed_identities = optional(object({
