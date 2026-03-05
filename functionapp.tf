@@ -84,7 +84,7 @@ module "avm-res-web-site" {
     }
   }
 
-  tags               = each.value.tags
+  tags               = merge(var.default_tags, each.value.tags)
   managed_identities = each.value.managed_identities
   depends_on         = [module.avm-res-storage-storageaccount]
 

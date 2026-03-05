@@ -31,9 +31,7 @@ variable "function_apps" {
       system_assigned            = optional(bool, true) # Default enable System Assigned Identity
       user_assigned_resource_ids = optional(set(string), [])
     }), { system_assigned = true })
-    tags = merge(var.default_tags, {
-      /* Add your tags */
-    })
+    tags = optional(map(string), {})
 
   }))
 }
