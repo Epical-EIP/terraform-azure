@@ -10,7 +10,7 @@ module "avm-res-search-searchservice" {
   enable_telemetry              = var.enable_telemetry
   sku                           = each.value.sku
   semantic_search_sku           = each.value.semantical_search_sku
-  allowed_ips                   = each.value
+  allowed_ips                   = each.value.allowed_ips
   public_network_access_enabled = each.value.public_network_access_enabled
   local_authentication_enabled  = each.value.local_authentication_enabled
   managed_identities            = each.value.managed_identities
