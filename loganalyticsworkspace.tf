@@ -10,7 +10,7 @@ module "avm-res-operationalinsights-workspace" {
   name                                      = join("-", ["log", local.name_prefix, each.key, local.name_suffix])
   log_analytics_workspace_retention_in_days = each.value.retention_in_days
   log_analytics_workspace_sku               = each.value.sku
-  log_analytics_workspace_internet_query_enabled = each.value.log_analytics_workspace_internet_query_enabled
+  log_analytics_workspace_internet_query_enabled = each.value.internet_query_enabled
   tags                                      = merge(var.default_tags, each.value.tags)
   log_analytics_workspace_identity = {
     type = "SystemAssigned"
