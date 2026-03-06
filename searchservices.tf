@@ -4,7 +4,7 @@ module "avm-res-search-searchservice" {
 
   for_each = contains(var.enabled_features, "search") ? var.search_services : {}
 
-  name                          = join("-", ["srch", each.key, local.name_suffix])
+  name                          = join("-", ["srch", local.name_prefix,each.key, local.name_suffix])
   resource_group_name           = azurerm_resource_group.rg["${each.value.resource_group}"].name
   location                      = var.location
   enable_telemetry              = var.enable_telemetry
